@@ -1,0 +1,22 @@
+.postdivpostuser{
+    width: 50vw;
+}
+
+.userprofpostuser{
+    right: 10vw;
+    text-align: end;
+}
+
+.userprofpostuser span{
+    text-decoration: underline;
+}
+
+.userprofpostuser h3{
+    color: #7749f8;
+}
+
+.userprofpostuser img{
+    width: 30vw;
+    height: 60vh;
+    object-fit: cover;
+}
