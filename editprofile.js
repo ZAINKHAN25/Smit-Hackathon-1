@@ -1,26 +1,9 @@
 import {
-    app,
     auth,
     db,
-    storage,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
     doc,
-    setDoc,
-    serverTimestamp,
-    collection,
-    getDocs,
     getDoc,
-    query,
-    orderBy,
-    limit,
-    deleteDoc,
-    addDoc,
-    updateDoc,
     onAuthStateChanged,
-    ref,
-    uploadBytesResumable,
-    getDownloadURL,
     signOut
 } from './firebaseConfig.js'
 
@@ -30,8 +13,6 @@ onAuthStateChanged(auth, async (user) => {
     console.log("user logged in hai");
     if (user) {
         console.log("Login hai");
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         console.log(checkifcurrentisloggedinornot[0]);
 
@@ -47,7 +28,7 @@ onAuthStateChanged(auth, async (user) => {
         }
         // ...
     } else {
-        // location.href = './index.html'
+        location.href = './loginpage.html'
         checkifcurrentisloggedinornot[0].innerHTML = ''
         checkifcurrentisloggedinornot[0].innerHTML = '<span class="loginrouteragainnagain">Login</span>'
         fooone()
@@ -87,39 +68,30 @@ const fooone = () => {
 };
 
 
-var postareahd = document.querySelector('.postareahd')
-getdatafromblog();
+var updateprofilefirstname = document.querySelector('#updateprofilefirstname')
+var updateprofilelastname = document.querySelector('#updateprofilelastname')
+var updatepassbtn = document.querySelector('#updatepassbtntwo')
 
-async function getdatafromblog() {
-    const querySnapshot = await getDocs(collection(db, "blogpost"));
-
-    querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        postareahd.innerHTML += `
-        <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
-    <div class="postpersondiv d-flex">
-        <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="https://avatars.githubusercontent.com/u/121414309?v=4" alt="">
-        <div>
-            <h3>${doc.data().textheading}</h3>
-            <p>${doc.data().time}</p>
-        </div>
-    </div>
-    <div class="maincontentofpost">
-        ${doc.data().textheading}
-    </div>
-    <div class="editdeletarea d-flex mt-5">
-        <p onclick="getdataisgood('${doc.data().authur}')" class='onclickpage'>See All from this</p>
-    </div>
-</div>`;
-
+updatepassbtn.addEventListener('click', async()=>{
+    await updateDoc(washingtonRef, {
+          capital: true
     });
-}
+})
 
-
-
-function getdataisgood(uid) {
-    JSON.stringify(localStorage.setItem("seeprofileofthis", `${uid}`));
-    location.href = './postuser.html'
-}
-window.getdataisgood = getdataisgood;
-
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const uid = user.uid;
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            updateprofilefirstname.value = docSnap.data().signupFirstName;
+            updateprofilelastname.value = docSnap.data().signupLastName;
+        } else {
+            console.log("No such document!");
+        }
+    } else {
+        // User is signed out
+        // ...
+    }
+});

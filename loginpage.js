@@ -1,27 +1,6 @@
 import {
-    app,
     auth,
-    db,
-    storage,
-    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    doc,
-    setDoc,
-    serverTimestamp,
-    collection,
-    getDocs,
-    getDoc,
-    query,
-    orderBy,
-    limit,
-    deleteDoc,
-    addDoc,
-    updateDoc,
-    onAuthStateChanged,
-    ref,
-    uploadBytesResumable,
-    getDownloadURL,
-    signOut
 } from './firebaseConfig.js'
 
 
@@ -34,7 +13,8 @@ loginbtnhd.addEventListener('click', () => {
 
     signInWithEmailAndPassword(auth, loginEmail.value, loginpassword.value)
         .then((userCredential) => {
-            // Signed in 
+            // Signed in
+            
             const user = userCredential.user;
             location.href = './index.html'
             // ...
