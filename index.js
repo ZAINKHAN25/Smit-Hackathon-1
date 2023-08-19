@@ -101,7 +101,7 @@ async function getdatafromblog() {
           <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
           <div>
               <h3>${doc2.data().textheading}</h3>
-              <p>${timeAgo(doc2.data().time)} ${docSnap.data().signupFirstName} ${docSnap.data().signupLastName}</p>
+              <p>${timeAgo(doc2.data().time)} <b>${docSnap.data().signupFirstName} ${docSnap.data().signupLastName}</b></p>
           </div>
       </div>
       <div class="maincontentofpost">

@@ -96,14 +96,14 @@ async function getuserdata() {
             console.log(doc.data());
             if (docSnap.id == doc.data().authur) {
 
-                
+                console.log(doc.data());
                 postareahd.innerHTML += `
                 <div class="postdivdashbord postdivpostuser my-3 px-5 pt-5 pb-5  rounded shadow-sm d-flex flex-column">
                 <div class="postpersondiv d-flex">
                 <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
                 <div>
                 <h3>${doc.data().textheading}</h3>
-                <p>${timeAgo(docSnap.data().time)} - ${docSnap.data().signupFirstName + " " + docSnap.data().signupLastName}</p>
+                <p>${timeAgo(doc.data().time)} - ${docSnap.data().signupFirstName + " " + docSnap.data().signupLastName}</p>
                 </div>
                 </div>
                 <div class="maincontentofpost">
@@ -160,4 +160,3 @@ function timeAgo(timestamp) {
     const years = months / 12;
     return `${Math.floor(years)} year${Math.floor(years) !== 1 ? 's' : ''} ago`;
   }
-  
