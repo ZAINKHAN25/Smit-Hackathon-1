@@ -1,0 +1,56 @@
+.navbar-hd{
+    background-color: #7749f8;
+}
+
+.navbar-hd h5{
+    color: #fff;
+}
+
+
+.loginbtnrouter, .signupbtnrouter{
+    background-color: transparent;
+    color: #fff;
+    border: none;
+}
+
+.headingofnav{
+    height: 10vh;
+    background-color: white;
+    color: black;
+}
+
+body{
+    background-color: #ebebeb;
+}
+
+.signupbody{
+    width: 100vw;
+    height: 83vh;
+}
+
+.signupform{
+    background-color: white;
+    padding-right: 10vw !important;
+    padding-left: 10vw !important;
+}
+
+.signupbtn,.updatepassbtn, .postbtn{
+    background-color: #7749f8;
+    width: 10vw;
+    color: #fff;
+    word-wrap: break-word;
+    border: none;
+}
+
+.signupformchild{
+    border: 1px solid rgba(00, 00, 00, 30%);
+}
+
+.signupformchild:focus{
+    box-shadow: 1px 1px 8px 1px #7749f8;
+    border: none !important;
+}
+
+.currentuserName{
+    color: white;
+}

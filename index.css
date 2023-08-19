@@ -1,0 +1,24 @@
+.dashbordotherbody{
+    width: 80vw;
+}
+
+.dashborddopostdiv{
+    background-color: white;
+}
+
+.postdivdashbord{
+    background-color: white;
+}
+
+.imageofpost{
+    object-fit: contain;
+}
+
+.editdeletarea p{
+    color: #7749f8;
+    padding-bottom: 5px;
+}
+
+.editdeletarea p:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,25 @@
+.updatepassbtn{
+    width: 30vw !important;
+}
+
+.dashbordotherbody{
+    width: 80vw;
+}
+
+.imgofprofile{
+    width: 60%;
+    height: 80vh;
+}
+
+.updateprofile{
+    background-color: white;
+}
+
+.passwordchildofupdateprofile{
+    width: 45vw;
+}
+
+.passwordchildofupdateprofile:focus{
+    
+    box-shadow: 1px 1px 8px 1px #7749f8;
+}
