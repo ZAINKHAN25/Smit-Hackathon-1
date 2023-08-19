@@ -54,3 +54,25 @@ body{
 .currentuserName{
     color: white;
 }
+
+.wanttopost, .allotheropost{
+    position: fixed !important;
+    bottom: 10vh; 
+    right: 3vw; 
+    background-color: #7749f8;
+}
+
+.allotheropost{
+    bottom: 10px !important;
+}
+
+.tost{
+    position: fixed !important;
+    bottom: 10vh; 
+    right: 3vw; 
+    background-color: #7749f8;
+}
+
+.allotheropost:hover,.wanttopost:hover{
+    color: white;
+}

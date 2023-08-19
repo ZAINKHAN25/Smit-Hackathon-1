@@ -4,7 +4,8 @@ import {
     doc,
     getDoc,
     onAuthStateChanged,
-    signOut
+    signOut,
+    updateDoc
 } from './firebaseConfig.js'
 
 var checkifcurrentisloggedinornot = document.querySelectorAll('.checkifcurrentisloggedinornot');
@@ -59,28 +60,25 @@ const fooone = () => {
             location.href = './loginpage.html';
         });
     }
-
-    var num = document.querySelector(".wanttopost");
-
-    num.addEventListener('click', () => {
-        location.href = './yourprofile.html';
-    });
 };
 
 
 var updateprofilefirstname = document.querySelector('#updateprofilefirstname')
 var updateprofilelastname = document.querySelector('#updateprofilelastname')
 var updatepassbtn = document.querySelector('#updatepassbtntwo')
-
-updatepassbtn.addEventListener('click', async()=>{
-    await updateDoc(washingtonRef, {
-          capital: true
-    });
-})
+console.log(updatepassbtn);
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const uid = user.uid;
+        const washingtonRef = doc(db, "users", uid);
+        
+        updatepassbtn.addEventListener('click', async()=>{
+            await updateDoc(washingtonRef, {
+                signupFirstName: updateprofilefirstname.value,
+                signupLastName :updateprofilelastname.value
+            });
+        })
         const docRef = doc(db, "users", uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {

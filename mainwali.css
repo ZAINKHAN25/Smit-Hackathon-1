@@ -23,13 +23,24 @@
     text-decoration: underline;
 }
 
-.wanttopost{
+.wanttopost, .allotheropost{
     position: fixed !important;
     bottom: 10vh; 
     right: 3vw; 
     background-color: #7749f8;
 }
 
-.wanttopost:hover{
+.allotheropost{
+    bottom: 10px !important;
+}
+
+.tost{
+    position: fixed !important;
+    bottom: 10vh; 
+    right: 3vw; 
+    background-color: #7749f8;
+}
+
+.allotheropost:hover,.wanttopost:hover{
     color: white;
 }
