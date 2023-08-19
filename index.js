@@ -79,11 +79,6 @@ const fooone = () => {
         });
     }
 
-    var num = document.querySelector(".wanttopost");
-
-    num.addEventListener('click', () => {
-        location.href = './yourprofile.html';
-    });
 };
 
 
@@ -93,29 +88,34 @@ getdatafromblog();
 async function getdatafromblog() {
     const querySnapshot = await getDocs(collection(db, "blogpost"));
 
-    querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        postareahd.innerHTML += `
-        <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
-    <div class="postpersondiv d-flex">
-        <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="https://avatars.githubusercontent.com/u/121414309?v=4" alt="">
-        <div>
-            <h3>${doc.data().textheading}</h3>
-            <p>${doc.data().time}</p>
-        </div>
-    </div>
-    <div class="maincontentofpost">
-        ${doc.data().textheading}
-    </div>
-    <div class="editdeletarea d-flex mt-5">
-        <p onclick="getdataisgood('${doc.data().authur}')" class='onclickpage'>See All from this</p>
-    </div>
-</div>`;
-
+    querySnapshot.forEach(async (doc2) => {
+        console.log(doc2.data().authur);
+        const docRef = doc(db, "users", doc2.data().authur);
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap.data());
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            postareahd.innerHTML += `
+  <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
+      <div class="postpersondiv d-flex">
+          <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
+          <div>
+              <h3>${doc2.data().textheading}</h3>
+              <p>${timeAgo(doc2.data().time)} ${docSnap.data().signupFirstName} ${docSnap.data().signupLastName}</p>
+          </div>
+      </div>
+      <div class="maincontentofpost">
+          ${doc2.data().textheading}
+      </div>
+      <div class="editdeletarea d-flex mt-5">
+          <p onclick="getdataisgood('${doc2.data().authur}')" class='onclickpage'>See All from this</p>
+      </div>
+  </div>`;
+        } else {
+            console.log("No such document!");
+        }
     });
 }
-
-
 
 function getdataisgood(uid) {
     JSON.stringify(localStorage.setItem("seeprofileofthis", `${uid}`));
@@ -123,3 +123,39 @@ function getdataisgood(uid) {
 }
 window.getdataisgood = getdataisgood;
 
+
+function timeAgo(timestamp) {
+    const currentTime = new Date().getTime();
+    const postTime = timestamp.toMillis(); // Assuming `timestamp` is a Firestore Timestamp object
+  
+    const timeDifference = currentTime - postTime;
+  
+    const seconds = timeDifference / 1000;
+    if (seconds < 60) {
+      return `${Math.floor(seconds)} seconds ago`;
+    }
+  
+    const minutes = seconds / 60;
+    if (minutes < 60) {
+      return `${Math.floor(minutes)} minute${Math.floor(minutes) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const hours = minutes / 60;
+    if (hours < 24) {
+      return `${Math.floor(hours)} hour${Math.floor(hours) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const days = hours / 24;
+    if (days < 30) {
+      return `${Math.floor(days)} day${Math.floor(days) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const months = days / 30;
+    if (months < 12) {
+      return `${Math.floor(months)} month${Math.floor(months) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const years = months / 12;
+    return `${Math.floor(years)} year${Math.floor(years) !== 1 ? 's' : ''} ago`;
+  }
+  

@@ -5,9 +5,16 @@ import {
     getDoc,
     onAuthStateChanged,
     signOut,
-    updateDoc
+    updateDoc,
+    ref,
+    storage,
+    uploadBytesResumable,
+    getDownloadURL,
+    setDoc
 } from './firebaseConfig.js'
 
+let imgsrc;
+let useruid;
 var checkifcurrentisloggedinornot = document.querySelectorAll('.checkifcurrentisloggedinornot');
 
 onAuthStateChanged(auth, async (user) => {
@@ -15,6 +22,7 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
         console.log("Login hai");
         const uid = user.uid;
+        useruid = uid;
         console.log(checkifcurrentisloggedinornot[0]);
 
         checkifcurrentisloggedinornot[0].innerHTML = ''
@@ -72,12 +80,45 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
         const uid = user.uid;
         const washingtonRef = doc(db, "users", uid);
-        
-        updatepassbtn.addEventListener('click', async()=>{
-            await updateDoc(washingtonRef, {
-                signupFirstName: updateprofilefirstname.value,
-                signupLastName :updateprofilelastname.value
-            });
+
+        updatepassbtn.addEventListener('click', async () => {
+            const docRef = doc(db, "users", useruid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log(docSnap.data().signupEmail);
+                console.log(docSnap.data().signupFirstName);
+                console.log(docSnap.data().signupLastName);
+                console.log(docSnap.data().signuppassword);
+                console.log(docSnap.data().userprofile);
+                
+                var {signupEmail: secondname, signuppassword: secondsecondname} = docSnap.data()
+                try {
+                    console.log(imgsrc);
+                    await fooonetwo();
+                    if (imgsrc) {
+                        await setDoc(doc(db, "users", useruid), {
+                            signupEmail: secondname,
+                            signupFirstName: updateprofilefirstname.value,
+                            signupLastName: updateprofilelastname.value,
+                            signuppassword: secondsecondname,
+                            userprofile: imgsrc
+                        });
+                    } else {
+                        await setDoc(doc(db, "users", useruid), {
+                            signupEmail: secondname,
+                            signupFirstName: updateprofilefirstname.value,
+                            signupLastName: updateprofilelastname.value,
+                            signuppassword: secondsecondname
+                        });
+                    }
+                    console.log("Document written with ID: ", docRef.id);
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+            } else {
+                console.log("No such document!");
+            }
+
         })
         const docRef = doc(db, "users", uid);
         const docSnap = await getDoc(docRef);
@@ -89,7 +130,41 @@ onAuthStateChanged(auth, async (user) => {
             console.log("No such document!");
         }
     } else {
-        // User is signed out
-        // ...
+
     }
 });
+
+// code to upload files on storagea
+async function fooonetwo() {
+
+    var imagefile = document.querySelector('#updateimagebtn')
+    const storageRef = ref(storage, `image/${imagefile.files[0].name}`);
+    console.log(imagefile.files[0].name);
+
+    const uploadTask = uploadBytesResumable(storageRef, imagefile.files[0]);
+
+    uploadTask.on('state_changed',
+        (snapshot) => {
+
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case 'paused':
+                    console.log('Upload is paused');
+                    break;
+                case 'running':
+                    console.log('Upload is running');
+                    break;
+            }
+        },
+        (error) => {
+            console.log(error);
+        },
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+                imgsrc = downloadURL;
+            });
+        }
+    );
+}
