@@ -93,24 +93,24 @@ onAuthStateChanged(auth, async (user) => {
                 
                 var {signupEmail: secondname, signuppassword: secondsecondname} = docSnap.data()
                 try {
-                    console.log(imgsrc);
-                    await fooonetwo();
-                    if (imgsrc) {
-                        await setDoc(doc(db, "users", useruid), {
-                            signupEmail: secondname,
-                            signupFirstName: updateprofilefirstname.value,
-                            signupLastName: updateprofilelastname.value,
-                            signuppassword: secondsecondname,
-                            userprofile: imgsrc
-                        });
-                    } else {
-                        await setDoc(doc(db, "users", useruid), {
-                            signupEmail: secondname,
-                            signupFirstName: updateprofilefirstname.value,
-                            signupLastName: updateprofilelastname.value,
-                            signuppassword: secondsecondname
-                        });
-                    }
+                    console.log(imgsrc || '');
+                    // await fooonetwo();
+                    // if (imgsrc) {
+                    //     await setDoc(doc(db, "users", useruid), {
+                    //         signupEmail: secondname,
+                    //         signupFirstName: updateprofilefirstname.value,
+                    //         signupLastName: updateprofilelastname.value,
+                    //         signuppassword: secondsecondname,
+                    //         userprofile: imgsrc
+                    //     });
+                    // } else {
+                    //     await setDoc(doc(db, "users", useruid), {
+                    //         signupEmail: secondname,
+                    //         signupFirstName: updateprofilefirstname.value,
+                    //         signupLastName: updateprofilelastname.value,
+                    //         signuppassword: secondsecondname
+                    //     });
+                    // }
                     console.log("Document written with ID: ", docRef.id);
                 } catch (e) {
                     console.error("Error adding document: ", e);
