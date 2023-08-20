@@ -31,8 +31,8 @@
             <input type="button" value="Publish Blog" class="mt-2 fw-bold rounded py-1 shadow postbtn" id="publishBook">
         </div>
         <!-- post area -->
-        <div class="mt-5 postdivhd">
-            <h3>My Blogs</h3>
+        <h3 class="mt-5">My Blogs</h3>
+        <div class="mt-1 postdivhd">
             <!-- post div -->
             <!-- <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
                 <div class="postpersondiv d-flex">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="editdeletarea d-flex mt-5">
                     <p>Delete</p>
-                    <p class="ms-4">Edit</p>
+                    <p onclick="editmodalfoo()" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="ms-4">Edit</p>
                 </div>
             </div> -->
             <!-- <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column"> -->
@@ -64,8 +64,8 @@
                 <div class="editdeletarea d-flex mt-5">
                     <p>Delete</p>
                     <p class="ms-4">Edit</p>
-                </div> -->
-            </div>
+                </div>
+            </div>  -->
         </div>
     </div>
     <div class="allotheropost py-2 px-4 rounded-5">
@@ -85,15 +85,33 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex flex-column">
-              <a href="/index.html">Want To go on home Page</a>
-              <a href="/postuser.html">Want To go on Upload Page</a>
-              <a href="/yourprofile.html">Want To go on Your Profile Page</a>
-              <a href="/editprofile.html">Want To go on edit Page</a>
-              <a href="/loginpage.html">Want To go on login Page</a>
-              <a href="/SignupPage.html">Want To go on sign up Page</a>
+                <a href="/index.html">Want To go on home Page</a>
+                <a href="/yourprofile.html">Want To go on Upload Page</a>
+                <a href="/editprofile.html">Want To go on edit Page</a>
+                <a href="/loginpage.html">Want To go on login Page</a>
+                <a href="/SignupPage.html">Want To go on sign up Page</a>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <input style="width: 100%;" type="text" class="modal-title fs-5 modalheadingedit" id="staticBackdropLabel">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="" style="width: 100%;" class="modalbodyedit"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" onclick="editinfirestorefoo()" class="btn btn-primary editbtnuid">Edit</button>
             </div>
           </div>
         </div>

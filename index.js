@@ -105,7 +105,7 @@ async function getdatafromblog() {
           </div>
       </div>
       <div class="maincontentofpost">
-          ${doc2.data().textheading}
+      ${doc2.data().publishBook}
       </div>
       <div class="editdeletarea d-flex mt-5">
           <p onclick="getdataisgood('${doc2.data().authur}')" class='onclickpage'>See All from this</p>

@@ -8,7 +8,9 @@ import {
     getDoc,
     addDoc,
     onAuthStateChanged,
-    signOut
+    signOut,
+    updateDoc,
+    deleteDoc
 } from './firebaseConfig.js'
 
 var checkifcurrentisloggedinornot = document.querySelectorAll('.checkifcurrentisloggedinornot');
@@ -82,11 +84,12 @@ publishBook.addEventListener('click', async () => {
     if (textheading.value !== '' || textdata.value !== '') {
         onAuthStateChanged(auth, async (user) => {
             console.log("user logged in hai");
+            console.log(textheading);
             if (user) {
                 console.log(user.uid);
                 try {
                     const docRef = await addDoc(collection(db, "blogpost"), {
-                        publishBook: publishBook.value,
+                        publishBook: textdata.value,
                         textheading: textheading.value,
                         authur: user.uid,
                         timestamp: serverTimestamp(),
@@ -107,36 +110,135 @@ publishBook.addEventListener('click', async () => {
 var postdivhd = document.querySelector('.postdivhd');
 
 async function getdatafromuser() {
-    onAuthStateChanged(auth, async(user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
-            const uid = user.uid;
+            console.log(user);
             const querySnapshot = await getDocs(collection(db, "blogpost"));
-            querySnapshot.forEach((doc) => {
-                if (doc.data().authur == uid) {
-                    postdivhd.innerHTML += `<div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
-                    <div class="postpersondiv d-flex">
-                        <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="https://avatars.githubusercontent.com/u/121414309?v=4" alt="">
-                        <div>
-                            <h3>${doc.data().textheading}</h3>
-                            <p>${doc.data().date} User name will come here</p>
-                        </div>
-                    </div>
-                    <div class="maincontentofpost">
-                        ${doc.data().textheading}
-                    </div>
-                    <div class="editdeletarea d-flex mt-5">
-                        <p>Delete</p>
-                        <p class="ms-4">Edit</p>
-                    </div>
-                </div>`
+            querySnapshot.forEach(async(doc2) => {
+                
+                console.log(doc2.data().authur + "post ka banda");
+                if (doc2.data().authur === user.uid) {
+                    // copycode
+                        const docRef = doc(db, "users", doc2.data().authur);
+                        const docSnap = await getDoc(docRef);
+                        console.log(docSnap.data());
+                        postdivhd.innerHTML = '';
+                        if (docSnap.exists()) {
+                            console.log(doc2.data());
+                            postdivhd.innerHTML += `<div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
+                            <div class="postpersondiv d-flex">
+                                <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
+                                <div>
+                                    <h3>${doc2.data().textheading}</h3>
+                                    <p>${timeAgo(doc2.data().time)} <b>${docSnap.data().signupFirstName} ${docSnap.data().signupLastName}</b></p>
+                                </div>
+                            </div>
+                            <div class="maincontentofpost">
+                                ${doc2.data().publishBook}
+                            </div>
+                            <div class="editdeletarea d-flex mt-5">
+                                <p onclick="deletepostfoo('${doc2.id}')">Delete</p>
+                                <p onclick="editmodalfoo('${doc2.id}', '${doc2.data().authur}', '${doc2.data().time}', '${doc2.data().timestamp}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="ms-4">Edit</p>
+                            </div>
+                        </div>`
+                        }
+                        // purana code
+                }
+                else{
+                    console.log("Me nahi mila");
                 }
             });
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+            // ...
+        } else {
+        }
+    });
 }
 
 getdatafromuser()
+
+
+async function editmodalfoo(para, author, time, timestamp) {
+    console.log(para + "it is para kuch bhi");
+
+    var modalbodyedit = document.querySelector('.modalbodyedit')
+    var modalheadingedit = document.querySelector('.modalheadingedit');
+    var editbtnuid = document.querySelector('.editbtnuid');
+
+    const docRef = doc(db, "blogpost", para);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        console.log(docSnap.data());
+        modalbodyedit.value = docSnap.data().publishBook;
+        modalheadingedit.value = docSnap.data().textheading;
+        editbtnuid.setAttribute('onclick', `editinfirestorefoo('${para}', '${author}', '${time}', '${timestamp}')`)
+    } else {
+        console.log("No such document!");
+    }
+    console.log(para);
+}
+
+async function editinfirestorefoo(uid, author, time, timestamp){
+    var one = author
+    var second = time
+    var third = timestamp
+    // console.log(uid, one, second , third);
+    var modalbodyedit = document.querySelector('.modalbodyedit')
+    var modalheadingedit = document.querySelector('.modalheadingedit');
+
+    console.log(uid);
+    const washingtonRef = doc(db, "blogpost", uid);
+    await updateDoc(washingtonRef, {
+    publishBook: modalbodyedit.value,
+    textheading: modalheadingedit.value
+    });
+  
+    location.reload();
+}
+
+window.editmodalfoo = editmodalfoo
+window.deletepostfoo = deletepostfoo
+window.editinfirestorefoo = editinfirestorefoo
+
+async function deletepostfoo(uid){
+    var one = confirm("Are you sure you want to delete this post")
+    if(one == true){
+        await deleteDoc(doc(db, "blogpost", uid));
+        location.reload();
+    }
+}
+
+function timeAgo(timestamp) {
+    const currentTime = new Date().getTime();
+    const postTime = timestamp.toMillis(); // Assuming `timestamp` is a Firestore Timestamp object
+  
+    const timeDifference = currentTime - postTime;
+  
+    const seconds = timeDifference / 1000;
+    if (seconds < 60) {
+      return `${Math.floor(seconds)} seconds ago`;
+    }
+  
+    const minutes = seconds / 60;
+    if (minutes < 60) {
+      return `${Math.floor(minutes)} minute${Math.floor(minutes) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const hours = minutes / 60;
+    if (hours < 24) {
+      return `${Math.floor(hours)} hour${Math.floor(hours) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const days = hours / 24;
+    if (days < 30) {
+      return `${Math.floor(days)} day${Math.floor(days) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const months = days / 30;
+    if (months < 12) {
+      return `${Math.floor(months)} month${Math.floor(months) !== 1 ? 's' : ''} ago`;
+    }
+  
+    const years = months / 12;
+    return `${Math.floor(years)} year${Math.floor(years) !== 1 ? 's' : ''} ago`;
+  }
+  

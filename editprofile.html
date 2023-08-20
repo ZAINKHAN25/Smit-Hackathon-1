@@ -1,72 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edite Profile</title>
-    <!-- bootstrap and font  awesome cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- custom css -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="editprofile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edite Profile</title>
+  <!-- bootstrap and font  awesome cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <!-- font awesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- custom css -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="editprofile.css">
 
 </head>
+
 <body>
-    <nav class="navbar-hd d-flex justify-content-around align-items-center">
-        <h5 class="pt-1">Personal Blogging Website</h5>
-        <div class="d-flex navbarsecond align-items-center">
-            <button class="loginbtnrouter checkifcurrentisloggedinornot fs-5">logout</button>
-        </div>
-    </nav>
-    <div class="headingofnav fs-1 fw-bold ps-5">
-        Profile
+  <nav class="navbar-hd d-flex justify-content-around align-items-center">
+    <h5 class="pt-1">Personal Blogging Website</h5>
+    <div class="d-flex navbarsecond align-items-center">
+      <button class="loginbtnrouter checkifcurrentisloggedinornot fs-5">logout</button>
     </div>
+  </nav>
+  <div class="headingofnav fs-1 fw-bold ps-5">
+    Profile
+  </div>
 
-    <div class="dashbordotherbody mt-5 ms-5">
-        <div class="updateprofile rounded shadow p-5 d-flex flex-column">
-            <img class="imgofprofile rounded-4" src="./assests/avatarr.webp" srcset="">
-            <input class="mt-5 ps-2 fw-bold rounded py-2 shadow updatepassbtn" id="updateimagebtn" type="file" value="Update Image ">
-            <h3 class="mt-5">Update Name</h3>
-            <input class="passwordchildofupdateprofile border py-2 px-4 mt-2" type="text" placeholder="First Name" id="updateprofilefirstname">
-            <input class="passwordchildofupdateprofile border py-2 px-4 mt-2" type="text" placeholder="Last Name" id="updateprofilelastname">
+  <div class="dashbordotherbody mt-5 ms-5">
+    <div class="updateprofile rounded shadow p-5 d-flex flex-column">
+      <img class="imgofprofile rounded-4" src="./assests/avatarr.webp" srcset="">
+      <input class="mt-5 ps-2 fw-bold rounded py-2 shadow updatepassbtn" id="updateimagebtn" type="file"
+        value="Update Image ">
+      <h3 class="mt-5">Update Name</h3>
+      <input class="passwordchildofupdateprofile border py-2 px-4 mt-2" type="text" placeholder="First Name"
+        id="updateprofilefirstname">
+      <input class="passwordchildofupdateprofile border py-2 px-4 mt-2" type="text" placeholder="Last Name"
+        id="updateprofilelastname">
 
-            <input class="mt-5 fw-bold rounded py-2 shadow updatepassbtn" id="updatepassbtntwo" type="button" value="Update Profile">
+      <input class="mt-5 fw-bold rounded py-2 shadow updatepassbtn" id="updatepassbtntwo" type="button"
+        value="Update Profile">
+    </div>
+  </div>
+  <div class="allotheropost py-2 px-4 rounded-5">
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Click Me
+    </button>
+  </div>
+  <!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Rounter's Page</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
-    <div class="allotheropost py-2 px-4 rounded-5">
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Click Me
-          </button>
-    </div>
-    <!-- Button trigger modal -->
-    
-      
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Rounter's Page</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-column">
-              <a href="/index.html">Want To go on home Page</a>
-              <a href="/postuser.html">Want To go on Upload Page</a>
-              <a href="/yourprofile.html">Want To go on Your Profile Page</a>
-              <a href="/editprofile.html">Want To go on edit Page</a>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
+        <div class="modal-body d-flex flex-column">
+          <a href="/index.html">Want To go on home Page</a>
+          <a href="/yourprofile.html">Want To go on Upload Page</a>
+          <a href="/editprofile.html">Want To go on edit Page</a>
+          <a href="/loginpage.html">Want To go on login Page</a>
+          <a href="/SignupPage.html">Want To go on sign up Page</a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
-        <!-- javascript of bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </div>
+  </div>
+  <!-- javascript of bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
 
-    <script type="module" src="app.js"></script>
-    <script type="module" src="editprofile.js"></script>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="editprofile.js"></script>
 </body>
+
 </html>
