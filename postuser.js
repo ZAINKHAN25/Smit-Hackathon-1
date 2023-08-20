@@ -78,6 +78,7 @@ async function getuserdata() {
 
     var usergmailhd = document.querySelector('.usergmailhd')
     var usernamehdofpost = document.querySelector('.usernamehdofpost')
+    var mainimage = document.querySelector('.mainimage')
     var allfromhd = document.querySelector('.allfromhd')
     var postareahd = document.querySelector('.postareahd')
     console.log(postareahd);
@@ -88,19 +89,20 @@ async function getuserdata() {
         console.log(docSnap.data().signupFirstName);
         usergmailhd.innerHTML = docSnap.data().signupFirstName + " " + docSnap.data().signupLastName;
         usernamehdofpost.innerHTML = docSnap.data().signupEmail;
-        allfromhd.innerHTML = `All From ${docSnap.data().signupEmail}`
-
+        allfromhd.innerHTML = `All From ${docSnap.data().signupEmail}`;
+        
         console.log(docSnap.data());
         const querySnapshot = await getDocs(collection(db, "blogpost"));
         querySnapshot.forEach((doc) => {
             console.log(doc.data());
             if (docSnap.id == doc.data().authur) {
-
+                
+                mainimage.src = docSnap.data().userprofile ||"./assests/avatarr.webp"
                 console.log(doc.data());
                 postareahd.innerHTML += `
                 <div class="postdivdashbord postdivpostuser my-3 px-5 pt-5 pb-5  rounded shadow-sm d-flex flex-column">
                 <div class="postpersondiv d-flex">
-                <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
+                <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src=${docSnap.data().userprofile ||"./assests/avatarr.webp"} alt="">
                 <div>
                 <h3>${doc.data().textheading}</h3>
                 <p>${timeAgo(doc.data().time)} - ${docSnap.data().signupFirstName + " " + docSnap.data().signupLastName}</p>

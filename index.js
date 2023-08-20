@@ -98,7 +98,7 @@ async function getdatafromblog() {
             postareahd.innerHTML += `
   <div class="postdivdashbord my-3 px-5 pt-5 pb-1  rounded shadow-sm d-flex flex-column">
       <div class="postpersondiv d-flex">
-          <img width="60px" height="60px" class="rounded-3 imageofpost me-3" src="./assests/avatarr.webp" alt="">
+          <img width="60px" height="60px" class="rounded-10 imageofpost me-3" src=${docSnap.data().userprofile ||"./assests/avatarr.webp"} alt="">
           <div>
               <h3>${doc2.data().textheading}</h3>
               <p>${timeAgo(doc2.data().time)} <b>${docSnap.data().signupFirstName} ${docSnap.data().signupLastName}</b></p>
