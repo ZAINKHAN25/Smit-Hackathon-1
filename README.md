@@ -7,9 +7,6 @@ Welcome to the Blogging Website project! This project showcases a simple bloggin
 - [Demo](#demo)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Demo
 Check out the live demo of the website [here](https://mini-hackathon-0.web.app/index.html).
